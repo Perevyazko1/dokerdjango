@@ -27,5 +27,5 @@ COPY .. /app
 
 EXPOSE 8000
 
-CMD service postgresql start && python manage.py runserver 0.0.0.0:8000
+CMD service postgresql start && gunicorn app.wsgi:application --bind 0.0.0.0:8000
 

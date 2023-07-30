@@ -1,0 +1,7 @@
+.cache
+.idea
+.git/
+.vagrant/
+pycache
+venv/
+Dockerfile

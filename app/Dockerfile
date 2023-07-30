@@ -25,6 +25,11 @@ RUN pip install --trusted-host pypi.python.org -r requirements.txt
 
 COPY .. /app
 
+RUN service postgresql start && python manage.py migrate && \
+    echo "from django.contrib.auth import get_user_model; User = get_user_model();  \
+    User.objects.create_superuser('admin', 'admin@example.com', 'password')" | python manage.py shell
+
+
 EXPOSE 8000
 
 CMD service postgresql start && gunicorn app.wsgi:application --bind 0.0.0.0:8000
